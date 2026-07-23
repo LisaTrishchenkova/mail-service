@@ -1,0 +1,39 @@
+services:
+  postgres:
+    image: postgres@sha256:a426e44bac0b759c95894d68e1a0ac03ecc20b619f498a91aae373bf06d8508d
+    container_name: ${POSTGRES_CONTAINER_NAME:-mailservice-postgres}
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-mailservice}
+      POSTGRES_USER: ${POSTGRES_USER:-mailuser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-mailpass}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-mailuser} -d ${POSTGRES_DB:-mailservice}"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  redis:
+    image: redis@sha256:02f2cc4882f8bf87c79a220ac958f58c700bdec0dfb9b9ea61b62fb0e8f1bfcf # v*.*.*
+    container_name: ${REDIS_CONTAINER_NAME:-mailservice-redis}
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  redis-insight:
+    image: redis/redisinsight:latest
+    container_name: ${REDIS_INSIGHT_CONTAINER_NAME:-mailservice-redis-insight}
+    ports:
+      - "${REDIS_INSIGHT_PORT:-5540}:5540"
+    depends_on:
+      - redis
+
+volumes:
+  postgres-data:

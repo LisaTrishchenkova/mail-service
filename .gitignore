@@ -1,0 +1,107 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+# Eclipse
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Log files
+*.log
+logs/
+
+# H2 Database
+*.db
+*.trace.db
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~.nib
+
+# Package Files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# JVM crash logs
+hs_err_pid*
+
+# Docker
+backups/
+
+# 运行时生成的文件
+app.pid
+app.log
+test-results*.txt
+start.log
+
+static
+
+local/
+
+# Claude Code agent brief — machine-local, not version-tracked.
+# Contains prod-infra cookbook (EC2 IDs, AWS account, IAM users) that
+# shouldn't live in repo history.
+CLAUDE.md
+
+# QA followup staging artifacts (S3 JSON candidates, handoff drafts) —
+# scratch space between agent dispatches, not part of the project.
+docs/qa-followup/
+
+# Claude Code workspace — machine-local skills, settings, plans, memory.
+.claude/
+
+# Secrets — never commit any of these. See SECURITY_INCIDENT_2026-05-05.md.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+serviceAccount.json
+service-account.json
+credentials.json
+
+# SpecStory artifacts
+.specstory/
+data/
