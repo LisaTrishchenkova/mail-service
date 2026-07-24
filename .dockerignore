@@ -12,13 +12,15 @@
 .DS_Store
 
 # Build output
-target
+#target
 *.class
-*.jar
 *.war
 *.ear
 *.zip
 *.tar.gz
+
+# но наш собранный jar приложения — нужен в образе
+!target/mail-service-0.0.1-SNAPSHOT.jar
 
 # Maven local cache (NOT .mvn — that's the wrapper, keep it)
 .m2

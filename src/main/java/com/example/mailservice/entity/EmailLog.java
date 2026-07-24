@@ -1,6 +1,8 @@
 package com.example.mailservice.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.time.Instant;
 
 @Entity
@@ -23,8 +25,8 @@ public class EmailLog {
 
   @Column(columnDefinition = "text")
   private String errorMessage;
-
-  @Column(nullable = false)
+  @CreationTimestamp
+  @Column(nullable = false, updatable = false)
   private Instant createdAt;
 
   protected EmailLog() {}
@@ -34,7 +36,6 @@ public class EmailLog {
     this.theme = theme;
     this.status = status;
     this.errorMessage = errorMessage;
-    this.createdAt = Instant.now();
   }
 
   public Long getId() {

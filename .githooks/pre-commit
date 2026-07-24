@@ -1,0 +1,18 @@
+#!/bin/bash
+# Pre-commit checks: formatting + i18n
+
+echo "🔍 Checking code formatting (spotless)..."
+./mvnw -q spotless:check  {
+  echo "❌ Formatting issues found. Run: ./mvnw spotless:apply"
+  exit 1
+}
+
+if [ -f bin/check-i18n.sh ]; then
+  echo "🔍 Checking i18n translations..."
+  bash bin/check-i18n.sh  {
+    echo "❌ i18n check failed."
+    exit 1
+  }
+fi
+
+echo "✅ Pre-commit checks passed"
