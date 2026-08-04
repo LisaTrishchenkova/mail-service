@@ -35,6 +35,21 @@ services:
     depends_on:
       - redis
 
+  rabbitmq:
+    image: rabbitmq:${RABBITMQ_VERSION:-3-management@sha256:9cfb7e92ae7d296aec4d1ae799e431209f7ed57d55f9c929d95667d0ccf1c920}
+    container_name: ${RABBITMQ_CONTAINER_NAME:-mailservice-rabbitmq}
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-guest}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-guest}
+    ports:
+      - "${RABBITMQ_PORT:-5672}:5672"
+      - "${RABBITMQ_MGMT_PORT:-15672}:15672"
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   app:
     image: mail-service:local
     container_name: ${APP_CONTAINER_NAME:-mail-service-app}
